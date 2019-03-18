@@ -286,4 +286,5 @@ from Autorization import GetUserByToken
 
 app.wsgi_app = ProxyFix(app.wsgi_app)
 if __name__ == '__main__':
+    print('App is running')
     app.run()

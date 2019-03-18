@@ -2,9 +2,11 @@
 
 import psycopg2
 import time
+import os
 
 class DBdriver():
-    conn = psycopg2.connect("host='localhost' dbname='testdb' user='pythonspot' password='111111'")
+    # conn = psycopg2.connect("host='localhost' dbname='testdb' user='pythonspot' password='111111'")
+    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
     conn.set_client_encoding('UTF8')
     cur = conn.cursor()
     table_name = None
@@ -77,14 +79,15 @@ class Modules(DBdriver):
         self.cur.execute(sql)
         self.conn.commit()
 
-    def insert(self, data, user_id):
+    def insert(self, requestform, user_id):
         sql = "INSERT INTO modules(user_id, language_from, language_to, module, show_module, module_comment)" \
             "VALUES (%s, %s, %s, %s, %s, %s)"
-        data = (user_id, data.get('language_from'), data.get('language_to'), data.get('module'), data.get('show_module'), data.get('module_comment'))
+        data = (user_id, requestform.get('language_from'), requestform.get('language_to'), requestform.get('module'), \
+                requestform.get('show_module'), requestform.get('module_comment'))
         return super()._insert(sql, data)
 
     def update(self, status, module_id):
-        sql = " SET show_module = %s WHERE id = "
+        sql = "UPDATE modules SET show_module = %s WHERE id = %s"
         data = (status, module_id)
         return super()._update(sql, data)
 
@@ -105,7 +108,8 @@ class Lessons(DBdriver):
     table_name = 'lessons'
 
     def __init__(self):
-        sql = "CREATE TABLE IF NOT EXISTS "+self.table_name+"(id SERIAL PRIMARY KEY, module_id INTEGER, lesson VARCHAR(20) UNIQUE," \
+        sql = "CREATE TABLE IF NOT EXISTS "+self.table_name+"(id SERIAL PRIMARY KEY, module_id INTEGER REFERENCES modules" \
+            " ON DELETE CASCADE, lesson VARCHAR(20) UNIQUE," \
             " show_lesson BOOLEAN, lesson_comment TEXT, FOREIGN KEY (module_id) REFERENCES modules (id))"
         self.cur.execute(sql)
         self.conn.commit()
@@ -121,12 +125,12 @@ class Lessons(DBdriver):
         return super()._select(sql, data)
 
     def select_by_id(self, lesson_id):
-        sql = "SELECT * FROM lessons WHERE id = "
+        sql = "SELECT * FROM lessons WHERE id = %s"
         data = (lesson_id,)
         return super()._select(sql, data)
 
     def update(self, status, lesson_id):
-        sql = "UPDATE lessons SET show_lesson = %s " + str(status) + " WHERE id = " + str(lesson_id)
+        sql = "UPDATE lessons SET show_lesson = %s WHERE id = %s"
         data = (status, lesson_id)
         return super()._update(sql, data)
 
@@ -167,6 +171,6 @@ class Answers(DBdriver):
         return super()._insert(sql, data)
 
     def read_by_lesson(self, lesson_id):
-        sql = "SELECT * FROM answers WHERE lesson_id = "
+        sql = "SELECT * FROM answers WHERE lesson_id = %s"
         data = (lesson_id,)
         return super()._select(sql, data)

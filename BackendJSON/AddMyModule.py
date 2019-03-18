@@ -1,8 +1,11 @@
-from TestDataForFrontEnd import modules
-def GetAllAoutrosModulesByRequstForm(requestform,user_id):
-    module=requestform['module']
-    show_module=requestform['show_module']
-    str="module: "+module+","+"show_module: "+show_module
-    outputDataDict={"status":str,
-                    "error":""}
-    return outputDataDict
+from BackendJSON.DatabaseDriver import Modules
+
+modules = Modules()
+
+def AddMyModule(requestform, user_id):
+    error = modules.insert(requestform, user_id)
+    if error == '':
+        status = 'ok'
+    else:
+        status = 'error'
+    return {"status": status, "error": error}

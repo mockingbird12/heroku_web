@@ -1,7 +1,22 @@
 from Autorization import GetUserByToken
 from JSONRequest import ReadJson
 from JSONRequest import config
+from JSONRequest.DatabaseDriver import Words
 import json
+
+words_db = Words()
+
+def ChangeWordInLesson1(requestform, user_id):
+    res = words_db.update(requestform)
+    if res == '':
+        word = requestform['word']
+        translate = requestform['translate']
+        result = 'change to' + word + ", " + translate
+        outputDataDict = {"resust": result}
+    else: outputDataDict = {"resust": res}
+    return outputDataDict
+
+
 def ChangeWordInLesson(requestform,user_id):
     #print(requestform)
     word_id=int(requestform['id'])
@@ -25,9 +40,13 @@ def ChangeWordInLesson(requestform,user_id):
     result = 'change to' + word+", "+translate
     outputDataDict = {"resust": result}
     return  outputDataDict
+
+
 def Test():
     fname = config.path
     data = ReadJson.ReadJson(fname)
     print(data)
+
+
 if __name__ == '__main__':
     Test()

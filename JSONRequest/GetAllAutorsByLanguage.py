@@ -1,9 +1,8 @@
-from TestDataForFrontEnd import autors
-def GetAllAuotorsByLanguage(language):
-    autorsDict=autors.auotors
-    language_autors=autorsDict[language]
-    return language_autors
+from JSONRequest.DatabaseDriver import Modules
+
+modules = Modules()
+
 def GetAuotorsByLangugageAndRequestForm(requestform):
-    language=requestform['language']
-    language_autors=GetAllAuotorsByLanguage(language)
-    return  language_autors
+    language_from = requestform['language_from']
+    language_to = requestform['language_to']
+    return modules.select_by_language(language_from, language_to)

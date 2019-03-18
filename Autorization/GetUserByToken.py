@@ -1,4 +1,6 @@
 from Autorization import autorization_config as config
+
+
 def GetIdByTocken(token):
     id=-1
     users = config.users
@@ -6,6 +8,8 @@ def GetIdByTocken(token):
         if u['token']==token:
             id=u['id']
     return id
+
+
 def GetTockenByLoginAndPassword(login,password):
     users=config.users
     token = "error"

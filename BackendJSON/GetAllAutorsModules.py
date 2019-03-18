@@ -1,8 +1,7 @@
-from TestDataForFrontEnd import modules
+from BackendJSON.DatabaseDriver import Modules
 
+modules = Modules()
 
 def GetAllAoutrosModulesByRequstForm(requestform):
-    author_id=requestform['autor_id']
-    allmodules = modules.modules
-    user_modules = allmodules[author_id]
-    return user_modules
+    user_id=requestform['autor_id']
+    return (modules.select_by_user(user_id))

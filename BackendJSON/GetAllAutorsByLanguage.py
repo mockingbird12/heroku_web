@@ -1,4 +1,4 @@
-from JSONRequest.DatabaseDriver import Modules
+from BackendJSON.DatabaseDriver import Modules
 
 modules = Modules()
 

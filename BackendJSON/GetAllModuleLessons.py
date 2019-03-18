@@ -1,7 +1,7 @@
-from TestDataForFrontEnd import modules
+from BackendJSON.DatabaseDriver import Lessons
+
+lessons = Lessons()
+
 def GetAllModuleLessonsByRequstForm(requestform):
-    author_id=requestform['autor_id']
-    module=requestform['module']
-    modulesLessons=modules.modulesLessons
-    module_Lessons=modulesLessons[author_id][module]
-    return  module_Lessons
+    module_id = requestform['module_id']
+    return (lessons.select_by_module(module_id))

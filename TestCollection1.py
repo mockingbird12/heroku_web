@@ -99,9 +99,9 @@ def DataCollection():
 
 
 def Test():
-    server = 'http://127.0.0.1:5000/'
-    #server='https://secure-ravine-71748.herokuapp.com/'
-    # server ='http://flasktest111.herokuapp.com/'
+    # server = 'http://127.0.0.1:5000/'
+    # server='https://secure-ravine-71748.herokuapp.com/'
+    server ='https://flasktest111.herokuapp.com/'
     dataCollection=DataCollection()
 
     # testList=["test_add_my_module","test_delete_module", "test_change_module_status"]

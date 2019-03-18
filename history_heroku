@@ -1,3 +1,5 @@
 #hobby-dev - название схемы
 #flasktest111 - название приложения
-heroku addons:create heroku-postgresql:hobby-dev -a flasktest111
+1. heroku addons:create heroku-postgresql:hobby-dev -a flasktest111
+
+2. git push heroku master

@@ -7,9 +7,6 @@ import os
 class DBdriver():
     # conn = psycopg2.connect("host='localhost' dbname='testdb' user='pythonspot' password='111111'")
     conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-    # conn = psycopg2.connect(host='ec2-50-17-227-28.compute-1.amazonaws.com', dbname='d2u6s3s2qii2jh', port='5432',
-    #                        user='ogeawkditejsnp',password='c893398e6cbc53136bb090d342481f65b6939dcfc6f79a8b4a63b48bad9212aa',
-    #                        sslmode='require')
     conn.set_client_encoding('UTF8')
     cur = conn.cursor()
     table_name = None

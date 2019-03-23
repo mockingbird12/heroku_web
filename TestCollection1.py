@@ -15,11 +15,11 @@ def DataCollection():
         #создать новый модуль AddMyModule(requestform, userid):
        "test_add_my_module": {'api': 'add_my_module',
                                'token': '000',
-                                'language_from':'ru',
-                                'language_to':'eng',
-                                'module':'test_module2',
-                               'show_module':"yes" ,
-                               'module_comment':'comment module test2'
+                                'language_from':'fr',
+                                'language_to':'ru',
+                                'module':'module6',
+                               'show_module':'no' ,
+                               'module_comment':'comment module6'
                                },
         "test_add_my_lesson": {'api': 'add_my_lesson',
                                'token': '000',
@@ -92,20 +92,24 @@ def DataCollection():
                                       'word':'car',
                                       'translate':'машина',
                                       'word_comment':'комментарий тип машины'
-                                    }
+                                    },
+        "test_get_all_autors_modules":{'api':'get_all_autors_modules',
+                                       'token': '000',
+                                       'autor_id': 1,
+                                       }
                    }
 
     return dataCollection
 
 
 def Test():
-    # server = 'http://127.0.0.1:5000/'
+    server = 'http://127.0.0.1:5000/'
     # server='https://secure-ravine-71748.herokuapp.com/'
-    server ='https://flasktest111.herokuapp.com/'
+    # server ='https://flasktest111.herokuapp.com/'
     dataCollection=DataCollection()
 
     # testList=["test_add_my_module","test_delete_module", "test_change_module_status"]
-    testList=["test_write_word_to_lesson"]
+    testList=["test_get_all_autors_modules"]
     for test in testList:
         data = (dataCollection.get(test))
         api = data['api']

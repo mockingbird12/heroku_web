@@ -232,9 +232,10 @@ def write_answer():
 @app.route('/get_all_autors_modules', methods=['POST'])
 def get_all_autors_modules():
     if request.method == 'POST':
-        token=request.form['token']
+        token=json.loads(request.get_json())['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        outputDataDict=GetAllAutorsModules.GetAllAoutrosModulesByRequstForm(request.form)
+        data = json.loads(request.get_json())
+        outputDataDict=GetAllAutorsModules.GetAllAoutrosModulesByRequstForm(data)
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
 
@@ -265,6 +266,7 @@ def test_list():
 
 
 from BackendJSON import CheckAndWriteAnswer
+from BackendJSON import WriteWordListToLesson
 from BackendJSON import WriteWordListToLesson
 from BackendJSON import DeleteLesson
 from BackendJSON import DeleteModule

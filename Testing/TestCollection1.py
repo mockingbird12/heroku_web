@@ -93,19 +93,15 @@ def DataCollection():
                                       'translate':'машина',
                                       'word_comment':'комментарий тип машины'
                                     },
-        "test_get_all_autors_modules":{'api':'get_all_autors_modules',
-                                       'token': '000',
-                                       'autor_id': 1,
-                                       }
                    }
 
     return dataCollection
 
 
 def Test():
-    server = 'http://127.0.0.1:5000/'
+    # server = 'http://127.0.0.1:5000/'
     # server='https://secure-ravine-71748.herokuapp.com/'
-    # server ='https://flasktest111.herokuapp.com/'
+    server ='https://flasktest111.herokuapp.com/'
     dataCollection=DataCollection()
 
     # testList=["test_add_my_module","test_delete_module", "test_change_module_status"]
@@ -117,7 +113,7 @@ def Test():
         print(url)
         res = requests.post(url, json=json.dumps(data))
         resj = json.loads(res.text)
-        print(resj)
+        for i in resj: print (i)
         print("______________________________")
 
 Test()

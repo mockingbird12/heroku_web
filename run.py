@@ -211,7 +211,7 @@ def read_lesson():
         token = json.loads(request.get_json())['token']
         user_id = GetUserByToken.GetIdByTocken(token)
         data = json.loads(request.get_json())
-        outputDataDict = ReadLesson.ReadLesson(data)
+        outputDataDict = ReadWordsInLesson.ReadLesson(data)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
@@ -220,12 +220,7 @@ def read_lesson():
 @app.route('/write_answer', methods=['POST']) # not done
 def write_answer():
     if request.method == 'POST':
-        token=request.form['token']
-        user_id = GetUserByToken.GetIdByTocken(token)
-        result=WriteAnswer.WriteAnswer(request.form,user_id)
-        outputDataDict={"result":result}
-        jsonarray = json.dumps(outputDataDict)
-        return jsonarray
+        return 'api is not created'
 
 
 # все модули автора
@@ -244,9 +239,10 @@ def get_all_autors_modules():
 @app.route('/get_all_my_modules', methods=['POST'])
 def get_all_my_modules():
     if request.method == 'POST':
-        token=request.form['token']
+        token = json.loads(request.get_json())['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        outputDataDict=GetAllMyModules.GetAllAoutrosModulesByRequstForm(request.form,user_id)
+        data = json.loads(request.get_json())
+        outputDataDict = GetAllAutorsModules.GetAllAoutrosModulesByRequstForm(data)
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
 
@@ -262,25 +258,21 @@ def test_list():
         outputDataDict={'test':'test'}
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
-#записать список слов в урок
 
 
 from BackendJSON import CheckAndWriteAnswer
-from BackendJSON import WriteWordListToLesson
 from BackendJSON import WriteWordListToLesson
 from BackendJSON import DeleteLesson
 from BackendJSON import DeleteModule
 from BackendJSON import ChangeLessonStatus
 from BackendJSON import AddMyLesson
 from BackendJSON import WriteWordToLesson
-from BackendJSON import ReadLesson
+from BackendJSON import ReadWordsInLesson
 from BackendJSON import ChangeWordInLesson
-from JSONRequest import WriteAnswer
 from BackendJSON import GetLessonAllAnswers
 from BackendJSON import GetAllAutorsByLanguage
 from BackendJSON import GetAllAutorsModules
 from BackendJSON import GetAllModuleLessons
-from JSONRequest import GetAllMyModules
 from BackendJSON import AddMyModule
 from BackendJSON import ChangeModuleStatus
 from Autorization import GetUserByToken

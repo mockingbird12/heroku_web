@@ -93,10 +93,13 @@ class Modules(DBdriver):
 
 
     def select_by_user(self, user_id):
-        sql = "SELECT * FROM modules WHERE user_id = %s"
-        data = (user_id,)
-        res = super()._select(sql, data)
-        return res
+        if user_id:
+            sql = "SELECT * FROM modules WHERE user_id = %s"
+            data = (user_id,)
+            res = super()._select(sql, data)
+            return res
+        else:
+            return 'Error user_id is empty'
 
     def select_by_language(self, language_from, language_to):
         sql = "SELECT * FROM modules WHERE language_from = %s AND language_to = %s"
@@ -124,11 +127,6 @@ class Lessons(DBdriver):
         data = (module_id,)
         return super()._select(sql, data)
 
-    def select_by_id(self, lesson_id):
-        sql = "SELECT * FROM lessons WHERE id = %s"
-        data = (lesson_id,)
-        return super()._select(sql, data)
-
     def update(self, status, lesson_id):
         sql = "UPDATE lessons SET show_lesson = %s WHERE id = %s"
         data = (status, lesson_id)
@@ -154,6 +152,11 @@ class Words(DBdriver):
         sql = "UPDATE words SET word = %s, translate = %s WHERE id = %s"
         sql_data = (data['word'], data['translate'], data['id'])
         return super()._update(sql, sql_data)
+
+    def select_by_lesson(self, lesson_id):
+        sql = "SELECT * FROM words WHERE lesson_id = %s"
+        data = (lesson_id,)
+        return super()._select(sql, data)
 
 
 class Answers(DBdriver):

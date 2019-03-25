@@ -1,7 +1,7 @@
-from BackendJSON.DatabaseDriver import Lessons
+from BackendJSON.DatabaseDriver import Words
 
-lessons = Lessons()
+words = Words()
 
 def ReadLesson(requestform):
     lesson_id = requestform['lesson_id']
-    return lessons.select_by_id(lesson_id)
+    return words.select_by_lesson(lesson_id)

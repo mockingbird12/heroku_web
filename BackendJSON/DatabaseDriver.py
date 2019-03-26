@@ -5,8 +5,8 @@ import time
 import os
 
 class DBdriver():
-    # conn = psycopg2.connect("host='localhost' dbname='testdb' user='pythonspot' password='111111'")
-    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+    conn = psycopg2.connect("host='localhost' dbname='testdb' user='pythonspot' password='111111'")
+    # conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
     conn.set_client_encoding('UTF8')
     cur = conn.cursor()
     table_name = None

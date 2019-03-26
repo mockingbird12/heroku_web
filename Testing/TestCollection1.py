@@ -74,8 +74,11 @@ def DataCollection():
 
         "test_read_lesson":{ 'api':'read_lesson',
                              'token': '000',
-                             'lesson_id':5
-
+                             'lesson_id':2
+                            },
+        "test_login_front":{'api':'login_front',
+                            'login': '000',
+                            'password': '111111'
                             },
 
         "test_write_wordlist_to_lesson":{ 'api':'write_wordlist_to_lesson',
@@ -99,13 +102,13 @@ def DataCollection():
 
 
 def Test():
-    # server = 'http://127.0.0.1:5000/'
+    server = 'http://127.0.0.1:5000/'
     # server='https://secure-ravine-71748.herokuapp.com/'
-    server ='https://flasktest111.herokuapp.com/'
+    # server ='https://flasktest111.herokuapp.com/'
     dataCollection=DataCollection()
 
     # testList=["test_add_my_module","test_delete_module", "test_change_module_status"]
-    testList=["test_get_all_autors_modules"]
+    testList=["test_login_front"]
     for test in testList:
         data = (dataCollection.get(test))
         api = data['api']

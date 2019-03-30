@@ -1,0 +1,1 @@
+curl --header "Content-Type: application/json"   --request POST   --data '{"token":"000", "lesson_id":"5","word":"jfugen", "translate":"test1", "word_comment":"com1"}'   http://localhost:5000/write_word_to_lesson

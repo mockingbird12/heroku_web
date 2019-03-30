@@ -29,8 +29,10 @@ def test():
 #авторизация
 @app.route('/login_front', methods=['POST'])
 def login_front():
-    login=json.loads(request.get_json())["login"]
-    password=json.loads(request.get_json())["password"]
+    # login=json.loads(request.get_json())["login"]
+    # password=json.loads(request.get_json())["password"]
+    login = request.get_json()["login"]
+    password = request.get_json()["password"]
     tokenFromUser=GetUserByToken.GetTockenByLoginAndPassword(login,password)
     error=""
     token=""
@@ -50,9 +52,9 @@ def login_front():
 @app.route('/add_my_module', methods=['POST'])
 def add_my_module():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict=AddMyModule.AddMyModule(data, user_id)
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
@@ -62,9 +64,9 @@ def add_my_module():
 @app.route('/add_my_lesson', methods=['POST'])
 def add_lesson_to_module():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict=AddMyLesson.AddMyLessonByRequstForm(data,user_id)
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
@@ -74,9 +76,9 @@ def add_lesson_to_module():
 @app.route('/change_lesson_status', methods=['POST'])
 def change_lesson_status():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict = ChangeLessonStatus.ChangeLessonStatusByRequestForm(data, user_id)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
@@ -87,9 +89,9 @@ def change_lesson_status():
 @app.route('/change_module_status', methods=['POST'])
 def change_module_status():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict = ChangeModuleStatus.ChangeModuleStatus(data, user_id)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
@@ -98,9 +100,9 @@ def change_module_status():
 @app.route('/change_word_in_lesson', methods=['POST']) # not done
 def change_word_in_lesson():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict = ChangeWordInLesson.ChangeWordInLesson(data, user_id)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
@@ -123,9 +125,9 @@ def check_and_write_answer():
 @app.route('/delete_lesson', methods=['POST'])
 def delete_lesson():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict = DeleteLesson.Deletelesson(data, user_id)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
@@ -136,9 +138,9 @@ def delete_lesson():
 @app.route('/delete_module', methods=['POST'])
 def delete_module():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict = DeleteModule.DeleteModule(data, user_id)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
@@ -149,10 +151,10 @@ def delete_module():
 @app.route('/get_all_autors_by_language', methods=['POST'])
 def get_all_language_autors():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
-        outputDataDict = GetAllModuleLessons.GetAllModuleLessonsByRequstForm(data)
+        data = request.get_json()
+        outputDataDict = GetAllModuleLessons.GetAllModulesByLanguage(data)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
@@ -161,8 +163,8 @@ def get_all_language_autors():
 @app.route('/get_all_module_lessons', methods=['POST'])
 def get_all_module_lessons():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
-        data = json.loads(request.get_json())
+        token = request.get_json()['token']
+        data = request.get_json()
         outputDataDict = GetAllModuleLessons.GetAllModuleLessonsByRequstForm(data)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
@@ -171,9 +173,9 @@ def get_all_module_lessons():
 @app.route('/get_lesson_all_answers', methods=['POST'])
 def get_lesson_all_answers():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict = GetLessonAllAnswers.GetLessonAllAnswers(data)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
@@ -183,9 +185,10 @@ def get_lesson_all_answers():
 @app.route('/write_wordlist_to_lesson', methods=['POST'])
 def write_word_list_to_lesson():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        req1 = request
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict = WriteWordListToLesson.WriteWordListToLesson(data, user_id)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
@@ -196,9 +199,9 @@ def write_word_list_to_lesson():
 @app.route('/write_word_to_lesson', methods=['POST'])
 def write_word_to_lesson():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict = WriteWordToLesson.WriteWordToLesson(data, user_id)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
@@ -208,9 +211,9 @@ def write_word_to_lesson():
 @app.route('/read_lesson', methods=['POST'])
 def read_lesson():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict = ReadWordsInLesson.ReadLesson(data)
         print(outputDataDict)
         jsonarray = json.dumps(outputDataDict)
@@ -220,16 +223,21 @@ def read_lesson():
 @app.route('/write_answer', methods=['POST']) # not done
 def write_answer():
     if request.method == 'POST':
-        return 'api is not created'
+        token = request.get_json()['token']
+        user_id = GetUserByToken.GetIdByTocken(token)
+        data = request.get_json()
+        outputDataDict = WriteAnswer.WriteAnswer(data, user_id)
+        jsonarray = json.dumps(outputDataDict)
+        return jsonarray
 
 
 # все модули автора
 @app.route('/get_all_autors_modules', methods=['POST'])
 def get_all_autors_modules():
     if request.method == 'POST':
-        token=json.loads(request.get_json())['token']
+        token=request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict=GetAllAutorsModules.GetAllAoutrosModulesByRequstForm(data)
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
@@ -239,9 +247,9 @@ def get_all_autors_modules():
 @app.route('/get_all_my_modules', methods=['POST'])
 def get_all_my_modules():
     if request.method == 'POST':
-        token = json.loads(request.get_json())['token']
+        token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
-        data = json.loads(request.get_json())
+        data = request.get_json()
         outputDataDict = GetAllAutorsModules.GetAllAoutrosModulesByRequstForm(data)
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
@@ -275,6 +283,7 @@ from BackendJSON import GetAllAutorsModules
 from BackendJSON import GetAllModuleLessons
 from BackendJSON import AddMyModule
 from BackendJSON import ChangeModuleStatus
+from BackendJSON import WriteAnswer
 from Autorization import GetUserByToken
 
 

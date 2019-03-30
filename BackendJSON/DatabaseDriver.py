@@ -164,13 +164,13 @@ class Answers(DBdriver):
 
     def __init__(self):
         sql = "CREATE TABLE IF NOT EXISTS answers(id SERIAL PRIMARY KEY, user_id INTEGER, lesson_id INTEGER, word_id INTEGER," \
-              "answer VARCHAR(20), date DATE, FOREIGN KEY (user_id) REFERENCES users (id))"
+              "answer VARCHAR(20), date VARCHAR(40), FOREIGN KEY (user_id) REFERENCES users (id))"
         self.cur.execute(sql)
         self.conn.commit()
 
-    def insert(self, data):
+    def insert(self, data, user_id):
         sql = "INSERT INTO answers(user_id, lesson_id, word_id, answer, date) VALUES (%s, %s, %s, %s, %s)"
-        data =  (data.get('user_id'), data.get('lesson_id'), data.get('word_id'), data.get('answer'), time.asctime())
+        data =  (user_id, data.get('lesson_id'), data.get('word_id'), data.get('answer'), time.asctime())
         return super()._insert(sql, data)
 
     def read_by_lesson(self, lesson_id):

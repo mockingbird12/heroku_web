@@ -1,0 +1,1 @@
+curl --header "Content-Type: application/json"   --request POST   --data '{"token":"000", "word_list":[{"lesson_id":"5","word":"dsajf", "translate":"ывларлы", "comment":"ывпуеке"}, {"lesson_id":"5","word":"kfnrh", "translate":"опвща", "comment":"ьитсм"}]}'   http://localhost:5000/write_wordlist_to_lesson

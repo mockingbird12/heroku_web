@@ -1,0 +1,1 @@
+curl --header "Content-Type: application/json"   --request POST   --data '{"token":"000","language_from": "esp", "language_to":"frd", "module": "post_module_1", "show_module":"True", "module_comment":"curl post comment"}'   http://localhost:5000/add_my_module

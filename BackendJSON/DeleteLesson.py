@@ -4,7 +4,6 @@ lessons = Lessons()
 
 def Deletelesson(requestform,user_id):
     lesson_id = requestform['lesson_id']
-    error = ''
     error = lessons.delete(lesson_id)
     if error:
         outputDataDict = {'status': 'error','error': error}

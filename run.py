@@ -29,8 +29,6 @@ def test():
 #авторизация
 @app.route('/login_front', methods=['POST'])
 def login_front():
-    # login=json.loads(request.get_json())["login"]
-    # password=json.loads(request.get_json())["password"]
     login = request.get_json()["login"]
     password = request.get_json()["password"]
     tokenFromUser=GetUserByToken.GetTockenByLoginAndPassword(login,password)

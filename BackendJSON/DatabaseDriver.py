@@ -5,7 +5,7 @@ import time
 import os
 
 class DBdriver():
-    # conn = psycopg2.connect("host='localhost' dbname='testdb' user='pythonspot' password='111111'") or \
+    # conn = psycopg2.connect("host='localhost' dbname='testdb' user='pythonspot' password='111111'")
     conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
     conn.set_client_encoding('UTF8')
     cur = conn.cursor()
@@ -149,8 +149,8 @@ class Words(DBdriver):
         return super()._insert(sql, sql_data)
 
     def update(self, data):
-        sql = "UPDATE words SET word = %s, translate = %s WHERE id = %s"
-        sql_data = (data['word'], data['translate'], data['id'])
+        sql = "UPDATE words SET word = %s, translate = %s, word_comment = %s, WHERE id = %s"
+        sql_data = (data['word'], data['translate'], data['id'], data['word_comment'])
         return super()._update(sql, sql_data)
 
     def select_by_lesson(self, lesson_id):

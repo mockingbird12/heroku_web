@@ -236,7 +236,7 @@ def get_all_autors_modules():
         token=request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
         data = request.get_json()
-        outputDataDict=GetAllAutorsModules.GetAllAoutrosModulesByRequstForm(data)
+        outputDataDict=GetAllAutorsModules.GetAllAutorsModulesByRequstForm(data, user_id)
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
 
@@ -248,7 +248,7 @@ def get_all_my_modules():
         token = request.get_json()['token']
         user_id = GetUserByToken.GetIdByTocken(token)
         data = request.get_json()
-        outputDataDict = GetAllAutorsModules.GetAllAoutrosModulesByRequstForm(data)
+        outputDataDict = GetAllAutorsModules.GetAllAutorsModulesByRequstForm(data)
         jsonarray = json.dumps(outputDataDict)
         return jsonarray
 

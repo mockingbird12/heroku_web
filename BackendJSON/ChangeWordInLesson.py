@@ -8,7 +8,7 @@ def ChangeWordInLesson(requestform, user_id):
         word = requestform['word']
         translate = requestform['translate']
         result ='user '+ str(user_id) +'change ' + word + ", to " + translate
-        outputDataDict = {"resust": result}
-    else: outputDataDict = {"resust": res}
+        outputDataDict = {"result": result}
+    else: outputDataDict = {"result": res}
     return outputDataDict
 
